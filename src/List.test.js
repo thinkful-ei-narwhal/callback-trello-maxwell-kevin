@@ -17,11 +17,17 @@ it('list render without crashing',()=>{
 });
 
 it('list renders the UI as expected',()=>{
+    const cards= [
+        {
+            id:1,
+            title: "first title",
+            content:"lore",
+        }
+    ]
     const tree = renderer
-
-        .create(<List/>)
-        .toJSON();
-    expect(tree).toMatchSnapshot();  
+    .create(<List cards= {cards}/>)
+    .toJSON();
+  expect(tree).toMatchSnapshot();  
 });
 
 
