@@ -1,4 +1,5 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import ReactDOM from 'react-dom';
 import List from './List.js'
 
@@ -14,4 +15,13 @@ it('list render without crashing',()=>{
     ReactDOM.render(<List cards= {cards}/>, div);
     ReactDOM.unmountComponentAtNode(div);
 });
+
+it('list renders the UI as expected',()=>{
+    const tree = renderer
+
+        .create(<List/>)
+        .toJSON();
+    expect(tree).toMatchSnapshot();  
+});
+
 
