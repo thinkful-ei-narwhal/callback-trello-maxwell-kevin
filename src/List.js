@@ -11,7 +11,9 @@ export default function List(props) {
       <div className='List-cards'>
         {props.cards.map((card) =>
           <Card
+            cardId={card.id}
             key={card.id}
+            deleteHandler={props.deleteHandler}
             title={card.title}
             content={card.content}
           />
