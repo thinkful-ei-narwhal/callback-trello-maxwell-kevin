@@ -46,16 +46,42 @@ class App extends Component {
       }
     }
 
+    // handleDeleteClicked = (id) => {
+    //   this.state.lists.map(list => {
+    //      list.cardIds.map(//fetches cardId's
+    //        cardId =>{
+    //         if(cardId !== id){
+    //         list.cardIds.unshift()
+    //         }
+    //         else {
+    //             list.cardIds.push()
+    //         }
+    //           }) 
+    //     // console.log(list);
+    //   });
+    //   delete this.state.allCards[id];
+    //   this.setState({
+    //     ...this.state
+    //   })
+    // }
+
   handleDeleteClicked = (id) => {
-    
-    delete this.state.allCards[id];
+    let filterFunc = (list) => list.cardIds.filter(cardId => cardId !== id)
+    let newIds = this.state.lists.map(list => {
+      return {
+        ...list,
+        cardIds:filterFunc(list)
+      }
+    });
+    let newCards = Object.entries(this.state.allCards).reduce((newAllCards, [key, value]) => 
+      key === id ? newAllCards : {...newAllCards, [key]: value}, {})
     this.setState({
-      ...this.state.allCards
+      lists: newIds,
+      allCards: newCards,
     })
   }
 
   render() {
-    console.log(this.state.allCards);
     return (
       <main className='App'>
         <header className='App-header'>
